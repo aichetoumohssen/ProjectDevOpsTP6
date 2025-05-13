@@ -1,0 +1,25 @@
+---
+- name: Déployer l'application Spring Boot
+  hosts: web
+  become: true
+
+  tasks:
+    - name: Installer Java
+      apt:
+        name: openjdk-17-jdk
+        state: present
+
+    - name: Copier les fichiers du projet
+      copy:
+        src: /home/aichetou/TP6DevOps
+        dest: /opt/springbootapp/
+        owner: root
+        group: root
+        mode: '0755'
+
+    - name: Lancer l'application Spring Boot
+      shell: |
+        cd /opt/springbootapp
+        ./mvnw spring-boot:run
+      async: 30
+      poll: 0
