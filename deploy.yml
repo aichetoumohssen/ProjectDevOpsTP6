@@ -11,15 +11,9 @@
 
     - name: Copier les fichiers du projet
       copy:
-        src: /home/aichetou/TP6DevOps
+        src: "{{ playbook_dir }}/"
         dest: /opt/springbootapp/
         owner: root
         group: root
         mode: '0755'
 
-    - name: Lancer l'application Spring Boot
-      shell: |
-        cd /opt/springbootapp
-        ./mvnw spring-boot:run
-      async: 30
-      poll: 0
